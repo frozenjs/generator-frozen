@@ -1,0 +1,11 @@
+{
+  "name": "<%= _.slugify(name) %>",
+  "version": "<%= version %>",
+  "main": "src/game.js",
+  "dependencies": {
+    "frozen": "0.4.0"
+  },
+  "devDependencies": {
+    "util": "dojo/util#1.8.3"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "generator-frozen",
+  "version": "0.0.0",
+  "description": "A generator for Yeoman",
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "homepage": "https://github.com/frozenjs/generator-frozen",
+  "bugs": "https://github.com/frozenjs/generator-frozen/issues",
+  "author": {
+    "name": "FrozenJS",
+    "email": "frozen@iceddev.com",
+    "url": "https://github.com/frozenjs"
+  },
+  "main": "app/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/frozenjs/generator-frozen.git"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "yeoman-generator": "~0.12.0",
+    "semver": "~2.0.8"
+  },
+  "devDependencies": {
+    "mocha": "~1.10.0"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
