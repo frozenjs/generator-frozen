@@ -1,3 +1,5 @@
+# Frozen Yeoman Generator
+
 Install [`yo`](http://yeoman.io/), [`grunt-cli`](http://gruntjs.com/getting-started), [`bower`](http://bower.io/) and [`generator-frozen`](http://github.com/frozenjs/generator-frozen)
 
 ```bash
