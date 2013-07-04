@@ -3,7 +3,7 @@
   "version": "<%= version %>",
   "main": "src/game.js",
   "dependencies": {
-    "frozen": "0.4.0"
+    "frozen": "0.4.1"
   },
   "devDependencies": {
     "util": "dojo/util#1.8.3"
