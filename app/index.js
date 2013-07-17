@@ -8,7 +8,23 @@ var FrozenGenerator = module.exports = function FrozenGenerator(args, options, c
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
-    this.installDependencies({ skipInstall: options['skip-install'] });
+    if(!options['skip-install']){
+      this.installDependencies({ skipInstall: options['skip-install'] });
+      if(this.ffInstall){
+        this.bowerInstall([
+          'firefox-install'
+        ], {
+          save: true
+        });
+      }
+      if(this.ffLandscape){
+        this.bowerInstall([
+          'firefox-landscape'
+        ], {
+          save: true
+        });
+      }
+    }
   });
 
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -47,12 +63,42 @@ FrozenGenerator.prototype.askFor = function askFor() {
     name: 'boxGame',
     message: 'Will your game use Box2D?',
     default: false
+  },{
+    type: 'confirm',
+    name: 'ffInstall',
+    message: 'Should your game be installable on Firefox/FFOS?',
+    default: false
+  },{
+    name: 'devName',
+    message: 'What is your name? (for webapp manifest)',
+    when: function(input){
+      return input.ffInstall;
+    }
+  },{
+    name: 'devUrl',
+    message: 'What is your URL? (for webapp manifest)',
+    when: function(input){
+      return input.ffInstall;
+    }
+  },{
+    type: 'confirm',
+    name: 'ffLandscape',
+    message: 'Lock in landscape mode on Firefox when available?',
+    default: false,
+    when: function(input){
+      return input.ffInstall;
+    }
   }];
 
   this.prompt(prompts, function (props) {
     for(var key in props){
       this[key] = props[key];
     }
+
+    // Since the questions may or may not be asked
+    this.devName = this.devName || '';
+    this.devUrl = this.devUrl || '';
+    this.ffLandscape = this.ffLandscape || false;
 
     done();
   }.bind(this));
@@ -65,18 +111,20 @@ FrozenGenerator.prototype.app = function app() {
   this.template('_package.json', 'package.json');
   this.template('_bower.json', 'bower.json');
   this.template('_README.md', 'README.md');
-  this.copy('config.js', 'config.js');
+  this.template('_config.js', 'config.js');
+  this.template('_index.html', 'index.html');
   this.copy('game.profile.js', 'game.profile.js');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('styles/game.css', 'styles/game.css');
+  if(this.ffInstall){
+    this.template('_manifest.webapp', 'manifest.webapp');
+  }
   if(this.boxGame){
-    this.template('BoxGame/_index.html', 'index.html');
     this.copy('BoxGame/draw.js', 'src/draw.js');
     this.copy('BoxGame/game.js', 'src/game.js');
     this.copy('BoxGame/update.js', 'src/update.js');
     this.copy('BoxGame/boxData.js', 'src/boxData.js');
   } else {
-    this.template('GameCore/_index.html', 'index.html');
     this.copy('GameCore/draw.js', 'src/draw.js');
     this.copy('GameCore/game.js', 'src/game.js');
     this.copy('GameCore/update.js', 'src/update.js');

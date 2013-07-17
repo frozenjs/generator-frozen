@@ -42,7 +42,8 @@ describe('frozen generator', function () {
       'description': 'fake game for tests',
       'version': '0.1.0',
       'repo': 'git://github.com/justasilly/test',
-      'boxGame': false
+      'boxGame': false,
+      'ffInstall': false
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
@@ -75,7 +76,27 @@ describe('frozen generator', function () {
       'description': 'fake game for tests',
       'version': '0.1.0',
       'repo': 'git://github.com/justasilly/test',
-      'boxGame': true
+      'boxGame': true,
+      'ffInstall': false
+    });
+    this.app.options['skip-install'] = true;
+    this.app.run({}, function () {
+      helpers.assertFiles(expected);
+      done();
+    });
+  });
+
+  it('creates expected files for Firefox Install', function(done){
+    var expected = [
+      'manifest.webapp'
+    ];
+    helpers.mockPrompt(this.app, {
+      'name': 'test game',
+      'description': 'fake game for tests',
+      'version': '0.1.0',
+      'repo': 'git://github.com/justasilly/test',
+      'boxGame': true,
+      'ffInstall': true
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {

@@ -1,0 +1,22 @@
+{
+  "name": "<%= _.slugify(name) %>",
+  "description": "<%= description %>",
+  "version": "<%= version %>",
+  "launch_path": "/index.html",
+  "icons": {
+    "16": "/icons/icon16.png",
+    "30": "/icons/icon30.png",
+    "32": "/icons/icon32.png",
+    "48": "/icons/icon48.png",
+    "60": "/icons/icon60.png",
+    "64": "/icons/icon64.png",
+    "128": "/icons/icon128.png"
+  },
+  "developer": {
+    "name": "<%= devName %>",
+    "url": "<%= devUrl %>"
+  },
+  "installs_allowed_from": ["*"],
+<% if(ffLandscape){ %>  "orientation": ["landscape"],<% } %>
+  "default_locale": "en"
+}

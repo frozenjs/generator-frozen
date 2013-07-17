@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="styles/game.css" type="text/css" rel="stylesheet" />
     <script src="config.js"></script>
+<% if(boxGame){ %>    <script src="deps/Box2d/index.js"></script><% } %>
     <script src="dist/game.js"></script>
     <script>
       if(typeof define !== "function" || !define.amd){
