@@ -70,13 +70,13 @@ FrozenGenerator.prototype.askFor = function askFor() {
     default: false
   },{
     name: 'devName',
-    message: 'What is your name? (for webapp manifest)',
+    message: '(Developer Info) What is your name?',
     when: function(input){
       return input.ffInstall;
     }
   },{
     name: 'devUrl',
-    message: 'What is your URL? (for webapp manifest)',
+    message: '(Developer Info) What is your homepage?',
     when: function(input){
       return input.ffInstall;
     }
@@ -116,9 +116,20 @@ FrozenGenerator.prototype.app = function app() {
   this.copy('game.profile.js', 'game.profile.js');
   this.copy('Gruntfile.js', 'Gruntfile.js');
   this.copy('styles/game.css', 'styles/game.css');
+
   if(this.ffInstall){
+    this.mkdir('icons');
+
     this.template('_manifest.webapp', 'manifest.webapp');
+    this.copy('icons/icon16.png', 'icons/icon16.png');
+    this.copy('icons/icon30.png', 'icons/icon30.png');
+    this.copy('icons/icon32.png', 'icons/icon32.png');
+    this.copy('icons/icon48.png', 'icons/icon48.png');
+    this.copy('icons/icon60.png', 'icons/icon60.png');
+    this.copy('icons/icon64.png', 'icons/icon64.png');
+    this.copy('icons/icon128.png', 'icons/icon128.png');
   }
+
   if(this.boxGame){
     this.copy('BoxGame/draw.js', 'src/draw.js');
     this.copy('BoxGame/game.js', 'src/game.js');
